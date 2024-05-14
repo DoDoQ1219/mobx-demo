@@ -1,4 +1,8 @@
-import { action, autorun, computed, makeAutoObservable, makeObservable, observable, reaction } from 'mobx'
+import { action, autorun, computed, configure, makeAutoObservable, makeObservable, observable, reaction, runInAction } from 'mobx'
+
+// configure({
+//     enforceActions: 'observed'
+// })
 class Counter{
     constructor(){
         // //参数1： target 把谁变成响应式（可观察）
@@ -13,12 +17,19 @@ class Counter{
         //参数1： target 让哪个对象变成可观察
         //参数2： 排除属性和方法
         //参数3： 指定自动绑定this
-        makeAutoObservable(this, {decrement: false}, {autoBind: true})
+        makeAutoObservable(this, {}, {autoBind: true})
     }
     count = 0
     increment(){
-        this.count++
+        setTimeout(() => {
+            runInAction(() => {
+                this.count++
+            })
+        }, 1000);
     }
+    // incrementAsync(){
+    //     setTimeout(this.increment, 1000);
+    // }
     decrement(){
         this.count--
     }
