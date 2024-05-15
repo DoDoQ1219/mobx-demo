@@ -41,13 +41,13 @@ class Counter{
     }
 }
 
-let myCounter = new Counter()
+const counter = new Counter()
 
 // autorun(() => {
 //     console.log('counter', myCounter.count)
 //     console.log('double', myCounter.double)
 // })
 
-reaction(() => myCounter.count, (value, oldValue) => {console.log('count发生了变化',value, oldValue)})
+reaction(() => counter.count, (value, oldValue) => {console.log('count发生了变化',value, oldValue)})
 
-export default myCounter;
+export default counter;
