@@ -19,6 +19,7 @@ class Counter{
         //参数3： 指定自动绑定this
         makeAutoObservable(this, {}, {autoBind: true})
     }
+    sum = 0
     count = 0
     increment(){
         setTimeout(() => {
@@ -43,11 +44,15 @@ class Counter{
 
 const counter = new Counter()
 
-// autorun(() => {
-//     console.log('counter', myCounter.count)
-//     console.log('double', myCounter.double)
-// })
-
+//监听属性
+autorun(() => {
+    console.log('count', counter.count)
+})
+//监听属性
+autorun(() => {
+    console.log('sum',counter.sum)
+})
+//监听属性
 reaction(() => counter.count, (value, oldValue) => {console.log('count发生了变化',value, oldValue)})
 
 export default counter;
